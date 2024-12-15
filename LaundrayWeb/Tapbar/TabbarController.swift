@@ -74,23 +74,30 @@ class TabBarController: UITabBarController {
     
 
     
-       func setupMiddleButton() {
-           let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
-           var menuButtonFrame = menuButton.frame
-           menuButtonFrame.origin.y = view.bounds.height - menuButtonFrame.height - 30
-           menuButtonFrame.origin.x = view.bounds.width/2 - menuButtonFrame.size.width/2
-           menuButton.frame = menuButtonFrame
+    func setupMiddleButton() {
+        let menuButton = UIButton(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
 
-           menuButton.backgroundColor = UIColor.appBlue
-           menuButton.layer.cornerRadius = menuButtonFrame.height/2
-           view.addSubview(menuButton)
+        var menuButtonFrame = menuButton.frame
+        let screenHeight = UIScreen.main.bounds.height
 
-           menuButton.setImage(UIImage(named: "newOrder"), for: .normal)
-           menuButton.addTarget(self, action: #selector(menuButtonAction(sender:)), for: .touchUpInside)
+       
+        if screenHeight <= 667 {
+            menuButtonFrame.origin.y = view.bounds.height - menuButtonFrame.height - 5
+        } else {
+            menuButtonFrame.origin.y = view.bounds.height - menuButtonFrame.height - 30
+        }
 
-           view.layoutIfNeeded()
-       }
+        menuButtonFrame.origin.x = view.bounds.width / 2 - menuButtonFrame.size.width / 2
+        menuButton.frame = menuButtonFrame
 
+        menuButton.backgroundColor = UIColor.appBlue
+        menuButton.layer.cornerRadius = menuButtonFrame.height / 2
+        menuButton.setImage(UIImage(named: "newOrder"), for: .normal)
+        menuButton.addTarget(self, action: #selector(menuButtonAction(sender:)), for: .touchUpInside)
+
+        view.addSubview(menuButton)
+        view.layoutIfNeeded()
+    }
 
 
     // MARK: - Actions
